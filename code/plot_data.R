@@ -47,17 +47,17 @@ max_cases <- 700000
 ggplot2::ggplot(data = df[df$value>0 & df$date<="2021-12-31",], 
                 mapping = ggplot2::aes(x = date, y = value, color = variant)) +
   ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = dates[dates$event=="mass_testing",]$date), linetype = "dotted") +
-  ggplot2::geom_text(ggplot2::aes(x=(dates[dates$event=="mass_testing",]$date - 7), label="Mass testing available", y=700000), colour="black", angle=90, size=3.5, hjust = 1) +
+  ggplot2::annotate("text", x=(dates[dates$event=="mass_testing",]$date - 7), label="Mass testing available", y=700000, colour="black", angle=90, size=4, hjust = 1) +
   ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = dates[dates$event=="vax_rollout",]$date), linetype = "dotted") +
-  ggplot2::geom_text(ggplot2::aes(x=(dates[dates$event=="vax_rollout",]$date - 7), label="Vaccination available", y=700000), colour="black", angle=90, size=3.5, hjust = 1) +
+  ggplot2::annotate("text", x=(dates[dates$event=="vax_rollout",]$date - 7), label="Vaccination available", y=700000, colour="black", angle=90, size=4, hjust = 1) +
   ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = dates[dates$event=="cohort_prevax_start",]$date), linetype = "dashed") +
-  ggplot2::geom_text(ggplot2::aes(x=(dates[dates$event=="cohort_prevax_start",]$date - 7), label="Start of follow-up for the pre-vaccination cohort", y=700000), colour="black", angle=90, size=3.5, hjust = 1) +
+  ggplot2::annotate("text", x=(dates[dates$event=="cohort_prevax_start",]$date - 7), label="Start of follow-up for the pre-vaccination cohort", y=700000, colour="black", angle=90, size=4, hjust = 1) +
   ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = dates[dates$event=="cohort_delta_start",]$date), linetype = "dotdash") +
-  ggplot2::geom_text(ggplot2::aes(x=(dates[dates$event=="cohort_delta_start",]$date - 7), label="Start of follow-up for the vaccinated and unvaccinated cohorts", y=700000), colour="black", angle=90, size=3.5, hjust = 1) +
+  ggplot2::annotate("text", x=(dates[dates$event=="cohort_delta_start",]$date - 7), label="Start of follow-up for the vaccinated and unvaccinated cohorts", y=700000, colour="black", angle=90, size=4, hjust = 1) +
   ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = dates[dates$event=="cohort_prevax_exp_stop",]$date), linetype = "dashed") +
-  ggplot2::geom_text(ggplot2::aes(x=(dates[dates$event=="cohort_prevax_exp_stop",]$date - 7), label="End of ascertainment of COVID-19 diagnoses for the pre-vaccination cohort", y=700000), colour="black", angle=90, size=3.5, hjust = 1) +
+  ggplot2::annotate("text", x=(dates[dates$event=="cohort_prevax_exp_stop",]$date - 7), label="End of ascertainment of COVID-19 diagnoses for the pre-vaccination cohort", y=700000, colour="black", angle=90, size=4, hjust = 1) +
   ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = dates[dates$event=="cohort_delta_stop",]$date), linetype = "solid") +
-  ggplot2::geom_text(ggplot2::aes(x=(dates[dates$event=="cohort_delta_stop",]$date - 7), label="End of follow-up for all cohorts", y=700000), colour="black", angle=90, size=3.5, hjust = 1) +
+  ggplot2::annotate("text", x=(dates[dates$event=="cohort_delta_stop",]$date - 7), label="End of follow-up for all cohorts", y=700000, colour="black", angle=90, size=4, hjust = 1) +
   ggplot2::geom_line() +
   ggplot2::labs(x = "", y = "COVID-19 cases identified by community testing", color = "Variant") +
   ggplot2::scale_x_continuous(breaks = months$date, labels = months$label) +
@@ -69,8 +69,9 @@ ggplot2::ggplot(data = df[df$value>0 & df$date<="2021-12-31",],
                  panel.background = ggplot2::element_blank(), 
                  axis.line = ggplot2::element_line(colour = "darkgrey"),
                  legend.key = ggplot2::element_rect(fill = "white"),
-                 legend.position = "bottom")
+                 legend.position = "bottom",
+                 text = ggplot2::element_text(size=12))
 
-ggplot2::ggsave("output/covid_variants.png",
+ggplot2::ggsave("output/covid_variants.pdf",
                 height = 210, width = 297, 
                 unit = "mm", dpi = 600, scale = 1)
